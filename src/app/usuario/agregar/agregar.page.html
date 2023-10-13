@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>agregar Usuario</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="guardar_Usuario()">
+    <ion-item>
+      <ion-label position="floating">Nombre:</ion-label>
+      <ion-input [(ngModel)]="data.nombre" name="Nombre" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Rut:</ion-label>
+      <ion-input [(ngModel)]="data.rut" name="Rut" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Direccion:</ion-label>
+      <ion-input [(ngModel)]="data.direccion" name="Direc" type="text" required></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">Agregar Usuario</ion-button>
+    
+  </form>
+</ion-content>

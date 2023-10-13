@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Actualizar Usuario</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row *ngFor="let listas of Usuario">
+    <form (ngSubmit)="actualizarDatos(listas)">
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-input [(ngModel)]="listas.nombre" name="nombre"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Id: {{listas.id}}</ion-label>
+      
+    </ion-item>
+    <ion-item>
+      <ion-label>rut:</ion-label>
+      <ion-input [(ngModel)]="listas.rut" name="rut"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Direcci&oacute;n:</ion-label>
+      <ion-input [(ngModel)]="listas.direccion" name="direccion"></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">Actualizar</ion-button>
+    </form>
+    
+  </ion-row>
+</ion-content>

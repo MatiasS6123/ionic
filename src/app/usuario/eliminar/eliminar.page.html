@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Eliminar Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row *ngFor="let lista of Usuario">
+    <form (ngSubmit)="DeleteUsuario(lista)">
+    
+
+      <ion-item>
+      <ion-label>Nombre: {{lista.nombre}}</ion-label>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Id: {{lista.id}}</ion-label> 
+    </ion-item>
+    <ion-item>
+      <ion-label>rut: {{lista.rut}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Direcci&oacute;n: {{lista.direccion}}</ion-label>
+    </ion-item>
+  
+    <ion-button expand="full" color="danger" type="submit">Eliminar</ion-button>
+    <br>
+    </form>
+  </ion-row>
+</ion-content>
