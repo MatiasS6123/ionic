@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';  // Importación del módulo de autenticación de AngularFire
 import { Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth'; // Importa 'GoogleAuthProvider' desde 'firebase/auth'
-
-
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  constructor(private afAuth: AngularFireAuth, private router:Router) {}  // Inyectamos AngularFireAuth
+  constructor(private afAuth: AngularFireAuth, private router:Router, private googlePlus: GooglePlus) {}
 
   async signIn(email: string, password: string): Promise<boolean> {
     try {
@@ -48,16 +47,28 @@ export class AuthService {
     return this.afAuth.authState; // Cambiar de getUserAuthState a authState
   }
 
-  async signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
+
+  async loginWithGoogle() {
     try {
-      const result = await this.afAuth.signInWithPopup(provider);
-      // El inicio de sesión con éxito devuelve un usuario en result.user
-      this.router.navigate(['/']); // Redirigir a la página deseada después del inicio de sesión
+      const res = await this.googlePlus.login({
+        'webClientId': '1010365717275-6vuja29lumottjqgvdaafcs6t9icd86d.apps.googleusercontent.com',
+        'offline': true
+      });
+
+      // Aquí es donde se corrigió el código
+      const googleCredential = GoogleAuthProvider.credential(res.idToken);
+
+      const firebaseUser = await this.afAuth.signInWithCredential(googleCredential);
+      console.log('Firebase success:', firebaseUser);
     } catch (error) {
-      console.error('Error de inicio de sesión', error);
+      console.error('Error:', error);
     }
   }
+
+
+
+
+
 
   logOut(){
     this.afAuth.signOut();
