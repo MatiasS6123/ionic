@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InteractionsService } from 'src/app/service/interactions.service';
 import { FirebaseServiceService } from 'src/app/service/firebase-service.service';
 import { UserI } from 'src/models/UserI';
 
@@ -17,7 +18,7 @@ export class ModificarPage implements OnInit {
     direccion: ""
   }
 
-  constructor(private db: FirebaseServiceService) { }
+  constructor(private db: FirebaseServiceService,private interec:InteractionsService) { }
 
   ngOnInit() {
     this.getLista();
@@ -30,16 +31,20 @@ export class ModificarPage implements OnInit {
     });
   }
 
-  actualizarDatos(Us: UserI) {
+  async actualizarDatos(Us: UserI) {
+    await this.interec.presentLoading("Actualizando");
+
     const coleccion = 'Usuario';
 
-    this.db
-      .update2(coleccion, Us.id, Us) // Debes pasar Us en lugar de this.newUsuario
+    await this.db.update2(coleccion, Us.id, Us) // Debes pasar Us en lugar de this.newUsuario
       .then(() => {
         console.log('Dato actualizado con éxito');
       })
       .catch((error) => {
         console.error('Error al actualizar el dato:', error);
       });
+
+      this.interec.presentToast("Usuario Modificado con exito")
+      this.interec.closeLoading();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InteractionsService } from 'src/app/service/interactions.service';
 import { FirebaseServiceService } from 'src/app/service/firebase-service.service';
 import { UserI } from 'src/models/UserI';
 
@@ -18,7 +19,7 @@ export class EliminarPage implements OnInit {
 
   }
  
-  constructor(private db :FirebaseServiceService) { }
+  constructor(private db :FirebaseServiceService, private inte:InteractionsService) { }
   
 
   ngOnInit() {
@@ -32,11 +33,18 @@ export class EliminarPage implements OnInit {
     });
   }
 
-  DeleteUsuario(usuario:UserI){
-    const path='Usuario'
-    console.log("Eliminar")
+  async DeleteUsuario(usuario:UserI){
+
+    const res= await this.inte.ODU("Alerta","¿Seguro que deseas eliminar a este usuario?");
+    if(res){
+      const path='Usuario'
+      console.log("Eliminar")
     
-    this.db.delete(path, usuario.id)
+      await this.db.delete(path, usuario.id)
+      this.inte.presentToast("Usuario eliminado con exito")
+
+
+    }
 
   }
 }

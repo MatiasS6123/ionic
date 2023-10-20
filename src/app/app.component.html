@@ -5,30 +5,66 @@
         <ion-list id="inbox-list">
           <ion-list-header>Menu</ion-list-header>
 
-
-          <!--<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+          <ion-menu-toggle *ngIf="!login">
+            <ion-item detail="true" [routerLink]="['/registro']" routerLinkActive="router-link">
+              <ion-label>
+                Registro
+              </ion-label>
+              <ion-icon name="people"></ion-icon>
             </ion-item>
-          </ion-menu-toggle>-->
 
-          <ion-menu-toggle>
-            <ion-item *ngIf="isLogged" routerLink="/registro">Registrar</ion-item>
-            <ion-item *ngIf="isLogged" routerLink="/login">Iniciar sesión</ion-item>
+            <ion-item detail="true" [routerLink]="['/login']" routerLinkActive="router-link">
+              <ion-label>
+                Login
+              </ion-label>
+              <ion-icon name="person"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
 
-               <!-- Si ESTÁ logeado -->
-            <ion-item *ngIf="!isLogged" routerLink="/usuario/agregar">Agregar</ion-item>
-            <ion-item *ngIf="!isLogged" routerLink="/usuario/Modificar">Listar</ion-item>
-            <ion-item *ngIf="!isLogged" routerLink="/usuario/eliminar">Eliminar</ion-item>
-            <ion-item *ngIf="!isLogged" routerLink="/listar">Actualizar</ion-item>
-                  </ion-menu-toggle>
+          <ion-menu-toggle *ngIf="login">
+            <ion-item detail="true" [routerLink]="['/usuario/agregar']" routerLinkActive="router-link">
+              <ion-label>
+                Agregar Usuario
+              </ion-label>
+              <ion-icon name="person-add"></ion-icon>
+            </ion-item>
 
+            <ion-item detail="true" [routerLink]="['/usuario/modificar']" routerLinkActive="router-link">
+              <ion-label>
+                Modificar Usuario
+              </ion-label>
+              <ion-icon name="arrow-up"></ion-icon>
+            </ion-item>
+            <ion-item detail="true" [routerLink]="['/usuario/eliminar']" routerLinkActive="router-link">
+              <ion-label>
+                Eliminar  Usuario
+              </ion-label>
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-item>
 
+            <ion-item detail="true" [routerLink]="['/usuario/listar']" routerLinkActive="router-link">
+              <ion-label>
+                Listar Usuario
+              </ion-label>
+              <ion-icon name="book"></ion-icon>
+            </ion-item>
+
+            
+            <ion-item>
+              <ion-label>Modo Oscuro</ion-label>
+              <ion-toggle [(ngModel)]="modoOscuro" (ionChange)="cambiarModoOscuro()"></ion-toggle>
+            </ion-item>
+
+            <ion-item detail="true" (click)="logOut()">
+              <ion-label>
+                Salir
+              </ion-label>
+              <ion-icon name="exit"></ion-icon>
+            </ion-item>
+
+          </ion-menu-toggle>
 
         </ion-list>
-
-
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

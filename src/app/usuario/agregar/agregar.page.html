@@ -9,20 +9,36 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="guardar_Usuario()">
+  <form (ngSubmit)="guardar_Usuario()" [formGroup]="myForm">
     <ion-item>
       <ion-label position="floating">Nombre:</ion-label>
-      <ion-input [(ngModel)]="data.nombre" name="Nombre" type="text" required></ion-input>
+      <ion-input
+        [(ngModel)]="data.nombre" 
+        formControlName="nombre" 
+        type="text" 
+        required
+        ></ion-input>
+        <ion-note color="danger" *ngIf="myForm?.get('nombre')?.hasError('required') && myForm?.get('nombre')?.touched">
+          El nombre es requerido.
+        </ion-note>
     </ion-item>
+
     <ion-item>
       <ion-label position="floating">Rut:</ion-label>
-      <ion-input [(ngModel)]="data.rut" name="Rut" type="text" required></ion-input>
+      <ion-input  
+      
+      [(ngModel)]="data.rut" formControlName="rut" type="text"></ion-input>
+      <ion-note color="danger" *ngIf="myForm?.get('rut')?.hasError('required') && myForm?.get('rut')?.touched">
+        El Rut es requerido.
+      </ion-note>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Direccion:</ion-label>
-      <ion-input [(ngModel)]="data.direccion" name="Direc" type="text" required></ion-input>
+      <ion-input  [(ngModel)]="data.direccion" formControlName="direccion" type="text"></ion-input>
+      <ion-note color="danger" *ngIf="myForm?.get('direccion')?.hasError('required') && myForm?.get('direccion')?.touched">
+        La dirección es requerida.
+      </ion-note>
     </ion-item>
     <ion-button expand="full" type="submit">Agregar Usuario</ion-button>
-    
   </form>
 </ion-content>

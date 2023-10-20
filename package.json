@@ -28,9 +28,12 @@
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
+    "angular2-text-mask": "^9.0.0",
     "firebase": "^10.4.0",
     "ionicons": "^7.0.0",
+    "ngx-mask": "^16.3.9",
     "rxjs": "~7.8.0",
+    "text-mask-addons": "^3.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
@@ -46,11 +49,11 @@
     "@angular/language-service": "^16.0.0",
     "@capacitor/cli": "5.4.1",
     "@ionic/angular-toolkit": "^9.0.0",
-    "@ionic/lab": "3.2.15",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "cordova-plugin-googleplus": "^8.5.2",
     "eslint": "^7.26.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -66,5 +69,10 @@
     "ts-node": "^8.3.0",
     "typescript": "~5.0.2"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-googleplus": {}
+    }
+  }
 }

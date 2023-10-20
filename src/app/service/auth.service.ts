@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';  // Importación del módulo de autenticación de AngularFire
 import { Router } from '@angular/router';
+import { GoogleAuthProvider } from 'firebase/auth'; // Importa 'GoogleAuthProvider' desde 'firebase/auth'
+
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  isLogged = false;
 
   constructor(private afAuth: AngularFireAuth, private router:Router) {}  // Inyectamos AngularFireAuth
 
@@ -41,19 +42,34 @@ export class AuthService {
   this.router.navigate(['/login']);  // Redirigir al usuario al inicio de sesión después de cerrar sesión
 }
 
-logOut(){
-  this.afAuth.authState.subscribe(user => {
-      this.isLogged = !!user;
-  });
-}
-
-
-
   // Aquí puedes añadir más métodos como signUp, signOut, etc.
 
   getUserAuthState() {
     return this.afAuth.authState; // Cambiar de getUserAuthState a authState
   }
+
+  async signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await this.afAuth.signInWithPopup(provider);
+      // El inicio de sesión con éxito devuelve un usuario en result.user
+      this.router.navigate(['/']); // Redirigir a la página deseada después del inicio de sesión
+    } catch (error) {
+      console.error('Error de inicio de sesión', error);
+    }
+  }
+
+  logOut(){
+    this.afAuth.signOut();
+  }
+
+
+
+
+
+    // Aquí puedes añadir más métodos como signUp, signOut, etc.
+
+
 
 }
 

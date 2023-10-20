@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { InteractionsService } from '../interactions.service';
+import { AuthService } from '../service/auth.service';
+import { InteractionsService } from '../service/interactions.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
     if(res){
       this.interactions.closeLoading();
       this.interactions.presentToast("sesión iniciada con Exito");
-
+      console.log(this.authService.getUserAuthState());
       this.router.navigate(['/']);
     }
     else{
